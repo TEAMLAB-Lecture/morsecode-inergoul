@@ -3,7 +3,7 @@
 import unittest
 import morsecode as mc
 
-from mock import patch
+from unittest.mock import patch
 from io import StringIO
 
 class TestMorseCode(unittest.TestCase):
@@ -111,7 +111,8 @@ class TestMorseCode(unittest.TestCase):
 
         print(console)
 
-        input_list = ["Hello!!", "Hi, Gachon", "This is,! CS50", "WTF!", "--. --", "--. --.  --. -  -  -  - . . . .",
+        input_list = ["Hello!!", "Hi, Gachon", "This is,! CS50", "WTF!", \
+                    "--. --", "--. --.  --. -  -  -  - . . . .",
                       "::helo::", "0"]
         with patch('builtins.input', side_effect=input_list):
             with patch('sys.stdout', new=StringIO()) as fakeOutput:
@@ -123,6 +124,7 @@ class TestMorseCode(unittest.TestCase):
                 self.assertIn(".-- - ..-.", console[4].upper())
                 self.assertIn("GM", console[5].upper())
                 self.assertIn("GG GT T T TEEEE", console[6].upper())
+                # self.assertIn("WRONG", console[6].upper())
                 self.assertIn("WRONG", console[7].upper())
 
 
@@ -166,3 +168,14 @@ class TestMorseCode(unittest.TestCase):
             "K": "-.-", "X": "-..-", "J": ".---", "W": ".--", "L": ".-..", "Y": "-.--", "M": "--", "Z": "--.."
         }
         return morse_code
+
+t1 = TestMorseCode()
+t1.test_is_help_command()
+t1.test_is_validated_english_sentence()
+t1.test_is_validated_morse_code()
+t1.test_get_cleaned_english_sentence()
+t1.test_decoding_character()
+t1.test_encoding_character()
+t1.test_decoding_sentence()
+t1.test_encoding_sentence()
+t1.test_main()
